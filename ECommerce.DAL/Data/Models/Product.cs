@@ -8,7 +8,7 @@ namespace ECommerce.DAL.Data.Models
 {
     public class Product
     {
-        int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;

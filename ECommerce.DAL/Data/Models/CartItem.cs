@@ -9,7 +9,7 @@ namespace ECommerce.DAL.Data.Models
     public class CartItem
     {
         public int Id { get; set; } // Unique identifier for the cart item
-        public int UserId { get; set; } // Identifier of the user who owns the cart item
+        public string UserId { get; set; } // Identifier of the user who owns the cart item
         public int ProductId { get; set; } // Identifier of the product in the cart item
         public int Quantity { get; set; } // Quantity of the product in the cart
 

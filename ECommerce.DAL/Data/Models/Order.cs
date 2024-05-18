@@ -9,7 +9,8 @@ namespace ECommerce.DAL.Data.Models
     public class Order
     {
         public int Id { get; set; } // Unique identifier for the order
-        public int UserId { get; set; } // Identifier of the user who placed the order
+        public string UserId { get; set; } // Identifier of the user who placed the order
+        public required User User { get; set; }
         public DateTime CreationDateTime { get; set; } // Date and time when the order was created
         public decimal TotalPrice { get; set; } // Total price of the order
 

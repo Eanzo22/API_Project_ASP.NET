@@ -10,6 +10,7 @@ namespace ECommerce.DAL.Data.Repositries.Generic
     where TEntity : class
     {
         IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> Find(Func<TEntity, bool> predicate);
         TEntity? GetById(int id);
         void Add(TEntity entity);
         //void Update(TEntity entity);

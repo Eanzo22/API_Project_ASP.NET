@@ -17,10 +17,9 @@ namespace ECommerce.BL.Managers.Carts
         {
             UnitOfWork = unitOfWork;   
         }
-        public void AddCartItem(AddCartDto _cart)
+        public void AddCart(AddCartDto _cart)
         {
             var cart = new Cart {
-                Id=_cart.Id,
                 UserId=_cart.UserId,
             };
             UnitOfWork.CartRepo.Add(cart);
@@ -65,7 +64,7 @@ namespace ECommerce.BL.Managers.Carts
             CartItems=cart.CartItems.Select(ci=> new ReadCartItemDto
             {
                 Id=ci.Id,
-                CartId=ci.Id,
+                CartId=ci.CartId,
                 ProductId=ci.ProductId,
                 Quantity=ci.Quantity,
             })

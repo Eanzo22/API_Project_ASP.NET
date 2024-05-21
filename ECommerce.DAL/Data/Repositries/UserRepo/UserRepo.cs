@@ -17,7 +17,7 @@ namespace ECommerce.DAL.Data.Repositries.UserRepo
         }
 
 
-        public async Task<User?> GetUserWithOrdersAndCart(string id)
+        public async Task<User?> GetUserWithOrdersAndCartAsync(string id)
         {
             return await ecommerceContext.users.Include(u => u.Cart).Include(u => u.orders).FirstOrDefaultAsync(u=>u.Id==id);
 

@@ -11,5 +11,6 @@ namespace ECommerce.BL.DTOS.Orders
         public string UserId { get; set; } = string.Empty;
         public DateTime CreationDateTime { get; set; }
         public decimal TotalPrice { get; set; }
+        public int Id { get; internal set; }
     }
 }

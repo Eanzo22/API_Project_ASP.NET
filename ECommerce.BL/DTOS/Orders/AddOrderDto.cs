@@ -1,4 +1,5 @@
-﻿using ECommerce.DAL.Data.Models;
+﻿using ECommerce.BL.DTOS.OrderItems;
+using ECommerce.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace ECommerce.BL.DTOS.Orders
         public int Id { get; set; } 
         public string UserId { get; set; } = string.Empty;
         public DateTime CreationDateTime { get; set; }
-        public decimal TotalPrice { get; set; } 
+        public decimal TotalPrice { get; set; }
+        public List<ReadOrderItemsDto> OrderItemsDtos { get; set; } = [];
     }
 }

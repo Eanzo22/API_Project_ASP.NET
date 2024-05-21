@@ -21,7 +21,6 @@ namespace ECommerce.BL.Managers.CartItems
         public void AddCartItem(AddCartItemDto cartItem)
         {
             var cartitem = new CartItem { 
-                Id= cartItem.Id,
                 CartId = cartItem.CartId,
                 Quantity=cartItem.Quantity,
                 ProductId= cartItem.ProductId,

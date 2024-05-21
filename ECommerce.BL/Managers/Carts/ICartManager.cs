@@ -12,7 +12,7 @@ namespace ECommerce.BL.Managers.Carts
     {
         public IEnumerable<ReadCartDto> GetAll();
         public ReadCartDto? GetById(int id);
-        public void AddCartItem(AddCartDto cart);
+        public void AddCart(AddCartDto cart);
         public void Edit(EditCartDto editCartDto);
         public void DeleteById(int id);
     }

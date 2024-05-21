@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.BL.Managers.Users
 {
-    internal class CustomUserManager
+    public class CustomUserManager
     {
     }
 }

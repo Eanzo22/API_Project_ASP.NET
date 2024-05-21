@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,11 @@ namespace ECommerce.DAL.Data.Repositries.Generic
         public void Delete(TEntity entity)
         {
             ecommerceContext.Set<TEntity>().Remove(entity);
+        }
+
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        {
+            return ecommerceContext.Set<TEntity>().Where(predicate).AsEnumerable();
         }
 
         public IEnumerable<TEntity> GetAll()

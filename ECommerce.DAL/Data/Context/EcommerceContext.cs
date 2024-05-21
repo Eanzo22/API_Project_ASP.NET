@@ -30,7 +30,7 @@ namespace ECommerce.DAL.Data.Context
             base.OnModelCreating(modelBuilder);
             #region RelationShips
             #region Cart
-            modelBuilder.Entity<Cart>().HasMany<CartItem>(c=>c.CartItems).WithOne();//see what's the output of this in the migration
+            modelBuilder.Entity<Cart>().HasMany<CartItem>(c=>c.CartItems).WithOne(ci=>ci.Cart).HasForeignKey(ci=>ci.CartId);//see what's the output of this in the migration
             #endregion
             #region User
             modelBuilder.Entity<User>()
@@ -53,6 +53,13 @@ namespace ECommerce.DAL.Data.Context
                 .HasOne(oi => oi.Product)
                 .WithMany()
                 .HasForeignKey(oi => oi.ProductId);
+            #endregion
+            #region CartItem
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Product)
+                .WithMany()
+                .HasForeignKey(ci => ci.ProductId);
             #endregion
             #endregion
         }

@@ -8,12 +8,10 @@ namespace ECommerce.DAL.Data.Models
 {
     public class Cart
     {
-        public int Id { get; set; } // Unique identifier for the cart
-        public string UserId { get; set; } // Identifier of the user who owns the cart
-                                      
-        // Navigation property to represent the associated user
+        public int Id { get; set; }
+        public required string UserId { get; set; } 
         public User? User { get; set; }
-        // Navigation property to represent the cart items associated with the cart
-        public ICollection<CartItem>? CartItems { get; set; }
+
+        public ICollection<CartItem> CartItems { get; set; } = [];
     }
 }

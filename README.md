@@ -14,7 +14,7 @@ This project is a backend API for an e-commerce application. It includes functio
 1. Clone the repository:
     ```bash
     git clone https://github.com/Eanzo22/API_Project_ASP.NET.git
-    cd ecommerce-api
+    cd API_Project_ASP.NET
     ```
 
 2. Update the `appsettings.json` with your database connection string and JWT settings.

@@ -9,8 +9,7 @@ namespace ECommerce.BL.DTOS.OrderItems
 {
     public class AddOrderItemsDto
     {
-        public int Id { get; set; }
-        public int OrderId { get; set; }
+
 
         public int ProductId { get; set; }
 

@@ -16,6 +16,11 @@ namespace ECommerce.DAL.Data.Repositries.CartItemsRepo
         {
         }
 
+        public async Task<CartItem?> GetByCartIdAndProductIdAsync(int id, int productId)
+        {
+            return  await ecommerceContext.cartItems.FirstOrDefaultAsync(ci=> ci.CartId==id && ci.ProductId==productId);
+        }
+
         public CartItem? GetCartItemWithCartAndProduct(int id)
         {
             return ecommerceContext.cartItems.Include(ci=>ci.Cart).Include(ci=>ci.Product).FirstOrDefault(ci=>ci.Id==id);

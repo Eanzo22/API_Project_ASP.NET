@@ -10,10 +10,10 @@ namespace ECommerce.BL.Managers.Products
 {
     public interface IProductManager
     {
-        public IEnumerable<ReadProductDto> GetAll();
+        public IEnumerable<ReadProductDto> GetAll(ProductFilterDto productFilterDto);
         public ReadProductDto? GetById(int id);
         public void AddProduct(AddProductDto product);
-        public void Edit(EditProductDto editProductDto);
-        public void DeleteById(int id);
+        public bool Edit(EditProductDto editProductDto);
+        public bool DeleteById(int id);
     }
 }

@@ -12,6 +12,6 @@ namespace ECommerce.DAL.Data.Models
     {
       
         public Cart? Cart { get; set; }
-        public ICollection<Order>? orders { get; set; }
+        public ICollection<Order> orders { get; set; } = [];
     }
 }

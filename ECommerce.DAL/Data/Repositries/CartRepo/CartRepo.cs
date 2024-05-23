@@ -16,6 +16,16 @@ namespace ECommerce.DAL.Data.Repositries.CartRepo
         {
         }
 
+        public  IEnumerable<Cart> GetAllWithCartItems()
+        {
+            return ecommerceContext.carts.Include(c => c.CartItems).AsNoTracking();
+        }
+
+        public async Task<Cart?> GetByUserIdAsync(string userId)
+        {
+            return await ecommerceContext.carts.FirstOrDefaultAsync(c => c.UserId == userId); 
+        }
+
         public Cart? GetCartWithUser(int id)
         {
             return ecommerceContext.carts.Include(c => c.User).FirstOrDefault(c => c.Id == id);

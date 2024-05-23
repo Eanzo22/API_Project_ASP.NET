@@ -34,7 +34,7 @@ namespace ECommerce.DAL.Data.Repositries.Generic
 
         public IEnumerable<TEntity> GetAll()
         {
-            return ecommerceContext.Set<TEntity>().AsNoTracking();
+            return ecommerceContext.Set<TEntity>().AsQueryable().AsNoTracking();
         }
 
         public TEntity? GetById(int id)

@@ -12,6 +12,6 @@ namespace ECommerce.BL.DTOS.Cart
         public int Id { get; set; }
         public string UserId { get; set; } = string.Empty;
 
-        public IEnumerable<ReadCartItemDto> CartItems { get; set; } = [];
+        public IEnumerable<ReadCartItemDto> CartItems { get; set; } = Enumerable.Empty<ReadCartItemDto>();
     }
 }

@@ -31,31 +31,38 @@ namespace ECommerce.BL.Managers.Products
             unitOfWork.SaveChanges();
         }
 
-        public void DeleteById(int id)
+        public bool DeleteById(int id)
         {
             var product = unitOfWork.ProductRepo.GetById(id);
             if (product is null)
-                return;
+                return false;
             unitOfWork.ProductRepo.Delete(product);
             unitOfWork.SaveChanges();
+            return true;
         }
 
-        public void Edit(EditProductDto editProductDto)
+        public bool Edit(EditProductDto editProductDto)
         {
             var product = unitOfWork.ProductRepo.GetById(editProductDto.Id);
-            if (product is null) return;
+            if (product is null) return false;
             product.Name= editProductDto.Name;
             product.Price= editProductDto.Price;
             product.Category= editProductDto.Category;
             product.Description= editProductDto.Description;
             product.ImageURL= editProductDto.ImageURL;
             unitOfWork.SaveChanges();
+            return true;
         }
 
-        public IEnumerable<ReadProductDto> GetAll()
+        public IEnumerable<ReadProductDto> GetAll(ProductFilterDto productFilterDto)
         {
 
-                var products= unitOfWork.ProductRepo.GetAll();
+                var query= unitOfWork.ProductRepo.GetAll();
+            if (!string.IsNullOrEmpty(productFilterDto.Name))
+                query = query.Where(p => p.Name.Contains(productFilterDto.Name.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(productFilterDto.Category))
+                query = query.Where(p => p.Category.Contains(productFilterDto.Category.Trim(), StringComparison.OrdinalIgnoreCase));
+            var products = query.ToList();
             return products.Select(p => new ReadProductDto
             {
                 Id = p.Id,

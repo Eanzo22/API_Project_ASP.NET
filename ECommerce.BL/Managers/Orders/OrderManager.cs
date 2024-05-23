@@ -23,7 +23,7 @@ namespace ECommerce.BL.Managers.Orders
             UnitOfWork=unitOfWork;
             this.orderItemManager = orderItemManager;
         }
-        public void AddOrder(List<AddOrderItemsDto> orderItemsDtos,string UserId )
+        public async Task<ReadOrderDto?> AddOrder(List<AddOrderItemsDto> orderItemsDtos,string UserId )
         {
             var order = new Order
             {
@@ -46,7 +46,18 @@ namespace ECommerce.BL.Managers.Orders
             }
             order.TotalPrice = orderItemManager.CalculateTotalPrice(order.OrderItems);
             UnitOfWork.OrderRepo.Add(order);
-            UnitOfWork.SaveChanges();
+            await UnitOfWork.SaveChangesAsync();
+            return new ReadOrderDto { 
+            Id= order.Id,
+            UserId= order.UserId,
+            CreationDateTime=order.CreationDateTime,
+            TotalPrice= order.TotalPrice,
+            OrderItems=order.OrderItems.Select(oi=> new ReadOrderItemsDto { 
+            OrderId= oi.OrderId,
+            ProductId= oi.ProductId,
+            Quantity= oi.Quantity,  
+            })
+            };
         }
 
         public void DeleteById(int id)
@@ -75,6 +86,23 @@ namespace ECommerce.BL.Managers.Orders
                 UserId = o.UserId,
                 TotalPrice= o.TotalPrice,
                 CreationDateTime= o.CreationDateTime,
+            });
+        }
+
+        public async Task<IEnumerable<ReadOrderDto>> GetAllOrdersByUserIdAsyn(string userId)
+        {
+            var orders =await UnitOfWork.OrderRepo.GetOrderByUserIdAsync(userId);
+            return orders.Select(o => new ReadOrderDto {
+                Id= o.Id,
+                UserId = o.UserId,
+                TotalPrice= o.TotalPrice,
+                CreationDateTime= o.CreationDateTime,
+                OrderItems=o.OrderItems.Select(oi => new ReadOrderItemsDto
+                {
+                    OrderId = oi.OrderId,
+                    ProductId = oi.ProductId,
+                    Quantity = oi.Quantity,
+                })
             });
         }
 

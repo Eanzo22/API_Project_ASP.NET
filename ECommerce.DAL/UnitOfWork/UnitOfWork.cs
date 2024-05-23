@@ -50,5 +50,10 @@ namespace ECommerce.DAL.UnitOfWork
         {
             _context.SaveChanges();
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace ECommerce.DAL.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
     [Migration("20240518214512_initial")]
-    partial class initial
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

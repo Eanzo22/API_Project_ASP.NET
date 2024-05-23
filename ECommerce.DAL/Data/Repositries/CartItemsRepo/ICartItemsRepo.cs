@@ -10,6 +10,7 @@ namespace ECommerce.DAL.Data.Repositries.CartItemsRepo
 {
     public interface ICartItemsRepo:IGenericRepo<CartItem>
     {
+        Task<CartItem?> GetByCartIdAndProductIdAsync(int id, int productId);
         CartItem? GetCartItemWithCartAndProduct(int id);
     }
 }

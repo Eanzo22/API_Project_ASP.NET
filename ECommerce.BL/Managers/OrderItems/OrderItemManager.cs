@@ -20,7 +20,6 @@ namespace ECommerce.BL.Managers.OrderItems
         public void AddOrderItem(AddOrderItemsDto orderItemsDto)
         {
             var orderItem = new OrderItem { 
-            OrderId= orderItemsDto.OrderId,
             ProductId= orderItemsDto.ProductId,
             Quantity= orderItemsDto.Quantity,
             };

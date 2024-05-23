@@ -16,6 +16,11 @@ namespace ECommerce.DAL.Data.Repositries.OrderRepo
         {
         }
 
+        public async Task<IEnumerable<Order>> GetOrderByUserIdAsync(string id)
+        {
+            return await ecommerceContext.orders.Where(o=>o.UserId==id).Include(o=>o.OrderItems).ToListAsync();
+        }
+
         public Order? GetOrderWithUserAndOrderItems(int id)
         {
             return ecommerceContext.orders.Include(o => o.User).Include(o => o.OrderItems).FirstOrDefault(o=>o.Id==id);

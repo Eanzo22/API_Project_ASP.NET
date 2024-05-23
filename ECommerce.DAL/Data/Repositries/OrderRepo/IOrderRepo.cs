@@ -11,5 +11,6 @@ namespace ECommerce.DAL.Data.Repositries.OrderRepo
     public interface IOrderRepo:IGenericRepo<Order>
     {
         Order? GetOrderWithUserAndOrderItems(int id);
+        Task<IEnumerable<Order>> GetOrderByUserIdAsync(string id);
     }
 }

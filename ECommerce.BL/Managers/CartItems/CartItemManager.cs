@@ -18,35 +18,60 @@ namespace ECommerce.BL.Managers.CartItems
         }
 
 
-        public void AddCartItem(AddCartItemDto cartItem)
+        public async Task<ReadCartItemDto?> AddCartItem(string UserId,AddCartItemDto cartItemDto)
         {
+            var cart = await UnitOfWork.CartRepo.GetByUserIdAsync(UserId);
+            if (cart is null) {
+                cart = new Cart { UserId = UserId };
+                UnitOfWork.CartRepo.Add(cart);
+            }
+
             var cartitem = new CartItem { 
-                CartId = cartItem.CartId,
-                Quantity=cartItem.Quantity,
-                ProductId= cartItem.ProductId,
+                CartId = cart.Id,
+                Quantity= cartItemDto.Quantity,
+                ProductId= cartItemDto.ProductId,
             };
             UnitOfWork.CartItemsRepo.Add(cartitem);
             UnitOfWork.SaveChanges();
+            return new ReadCartItemDto 
+            { 
+                Id = cartitem.Id,
+                CartId= cartitem.CartId, 
+                Quantity= cartitem.Quantity,
+                ProductId= cartitem.ProductId,
+            };
         }
 
-        public void DeleteById(int id)
+        public async Task<bool> DeleteById(string userId , int  productId)
         {
-            var cartitem=UnitOfWork.CartItemsRepo.GetById(id);
-            if (cartitem is null)
-                return;
-            UnitOfWork.CartItemsRepo.Delete(cartitem);
-            UnitOfWork.SaveChanges();
+            var cart= await UnitOfWork.CartRepo.GetByUserIdAsync(userId);
+            if (cart is null)
+                return false;
+            var cartItem = await UnitOfWork.CartItemsRepo.GetByCartIdAndProductIdAsync(cart.Id, productId);
+            if (cartItem is null) 
+                return false;
+            UnitOfWork.CartItemsRepo.Delete(cartItem);
+            await UnitOfWork.SaveChangesAsync();
+            return true;
         }
 
-        public void Edit(EditCartItemDto editCartItemDto)
+        public async Task<ReadCartItemDto?> Edit(string userId, EditCartItemDto editCartItemDto)
         {
-            var cartitem=UnitOfWork.CartItemsRepo.GetById(editCartItemDto.Id);
-            if (cartitem is null)
-                return;
-            cartitem.Quantity = editCartItemDto.Quantity;
-            cartitem.CartId = editCartItemDto.CartId;
-            cartitem.ProductId= editCartItemDto.ProductId;
-            UnitOfWork.SaveChanges();
+            var cart = await UnitOfWork.CartRepo.GetByUserIdAsync(userId);
+            if (cart == null) return null;
+
+            var cartItem = await UnitOfWork.CartItemsRepo.GetByCartIdAndProductIdAsync(cart.Id, editCartItemDto.ProductId);
+            if (cartItem == null) return null;
+
+            cartItem.Quantity = editCartItemDto.Quantity;
+            await UnitOfWork.SaveChangesAsync();
+            return new ReadCartItemDto { 
+                Id= cart.Id,
+                CartId=cartItem.CartId, 
+                Quantity = cartItem.Quantity,
+                ProductId=cartItem.ProductId,
+
+            };
 
         }
 

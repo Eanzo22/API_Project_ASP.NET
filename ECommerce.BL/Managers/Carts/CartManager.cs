@@ -43,14 +43,24 @@ namespace ECommerce.BL.Managers.Carts
             UnitOfWork.SaveChanges();
         }
 
-        public IEnumerable<ReadCartDto> GetAll()
+
+        public async Task<IEnumerable<ReadCartDto>?> GetAll()
         {
-               var carts= UnitOfWork.CartRepo.GetAll();
+               var carts=  UnitOfWork.CartRepo.GetAllWithCartItems();
+            if (carts is null)
+                return null;
             return carts.Select(c => new ReadCartDto
             {
                 Id = c.Id,
                 UserId = c.UserId,
-            }) ;
+                CartItems = c.CartItems.Select(ci => new ReadCartItemDto
+                {
+                    Id = ci.Id,
+                    CartId = ci.CartId,
+                    ProductId = ci.ProductId,
+                    Quantity = ci.Quantity,
+                }).ToList()
+            }).ToList() ;
         }
 
         public ReadCartDto? GetById(int id)

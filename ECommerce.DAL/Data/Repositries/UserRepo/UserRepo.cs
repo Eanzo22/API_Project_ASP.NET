@@ -16,6 +16,10 @@ namespace ECommerce.DAL.Data.Repositries.UserRepo
         {
         }
 
+        public  async Task<IEnumerable<User?>> GetAllUsersWithOrdersAndCartAsync()
+        {
+            return await ecommerceContext.users.Include(u => u.Cart).Include(u => u.orders).ToListAsync();
+        }
 
         public async Task<User?> GetUserWithOrdersAndCartAsync(string id)
         {

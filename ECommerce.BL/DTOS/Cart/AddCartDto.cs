@@ -9,7 +9,6 @@ namespace ECommerce.BL.DTOS.Cart
 {
     public class AddCartDto
     {
-        public int Id { get; set; }
         public string UserId { get; set; } = string.Empty;
 
 

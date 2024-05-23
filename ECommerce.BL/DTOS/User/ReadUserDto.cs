@@ -12,6 +12,7 @@ namespace ECommerce.BL.DTOS.User
         public string Id { get; set; } = string.Empty;
         public string UserName { get; set; }= string.Empty;
         public string UserEmail { get; set; } = string.Empty;
+        public int CartId { get; set; }
         public IEnumerable<ReadOrderDto> Orders { get; set; } = [];
     }
 }

@@ -10,6 +10,8 @@ namespace ECommerce.DAL.Data.Repositries.UserRepo
 {
     public interface IUserRepo:IGenericRepo<User>
     {
+        Task<IEnumerable<User?>> GetAllUsersWithOrdersAndCartAsync();
+
         Task<User?> GetUserWithOrdersAndCartAsync(string id);
     }
 }

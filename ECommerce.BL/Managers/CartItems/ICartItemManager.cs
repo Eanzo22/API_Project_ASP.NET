@@ -1,4 +1,5 @@
 ﻿using ECommerce.BL.DTOS.CartItems;
+using ECommerce.DAL.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace ECommerce.BL.Managers.CartItems
     {
         public IEnumerable<ReadCartItemDto> GetAll();
         public ReadCartItemDto? GetById(int id);
-        public void AddCartItem(AddCartItemDto cartItem);
-        public void Edit(EditCartItemDto editCartItemDto);
-        public void DeleteById(int id);
+        public Task<ReadCartItemDto?> AddCartItem(string userId,AddCartItemDto cartItem);
+        public Task<ReadCartItemDto?> Edit(string userId,EditCartItemDto editCartItemDto);
+        public Task<bool> DeleteById(string userId , int  productId)
+        ;
     }
 }

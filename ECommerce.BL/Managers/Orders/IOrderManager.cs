@@ -13,7 +13,9 @@ namespace ECommerce.BL.Managers.Orders
     {
         public IEnumerable<ReadOrderDto> GetAll();
         public ReadOrderDto? GetById(int id);
-        public void AddOrder(List<AddOrderItemsDto> orderItemsDtos, string UserId);
+        public  Task<ReadOrderDto?> AddOrder(List<AddOrderItemsDto> orderItemsDtos, string UserId);
+        public Task<IEnumerable<ReadOrderDto>> GetAllOrdersByUserIdAsyn(string userId);
+
         public void Edit(EditOrderDto editOrderDto);
         public void DeleteById(int id);
     }

@@ -10,7 +10,8 @@ namespace ECommerce.BL.Managers.Carts
 {
     public interface ICartManager
     {
-        public IEnumerable<ReadCartDto> GetAll();
+        public Task<IEnumerable<ReadCartDto>?> GetAll();
+
         public ReadCartDto? GetById(int id);
         public void AddCart(AddCartDto cart);
         public void Edit(EditCartDto editCartDto);

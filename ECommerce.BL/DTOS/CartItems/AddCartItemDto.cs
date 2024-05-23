@@ -8,9 +8,9 @@ namespace ECommerce.BL.DTOS.CartItems
 {
     public class AddCartItemDto
     {
-        public int Id { get; set; } 
+ 
         public int Quantity { get; set; } 
-        public required int CartId { get; set; }
+        /*public required int CartId { get; set; }*/
         public int ProductId { get; set; } 
 
     }

@@ -21,6 +21,7 @@ namespace ECommerce.DAL.UnitOfWork
         public IProductRepo ProductRepo{ get; }
         public IUserRepo UserRepo { get;}
         void SaveChanges();
+        Task SaveChangesAsync();
 
     }
 }

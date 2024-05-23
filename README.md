@@ -13,7 +13,7 @@ This project is a backend API for an e-commerce application. It includes functio
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/eanzo22/ecommerce-api.git
+    git clone https://github.com/Eanzo22/API_Project_ASP.NET.git
     cd ecommerce-api
     ```
 

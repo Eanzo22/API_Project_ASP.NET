@@ -32,7 +32,7 @@ namespace API_Project.Controllers
                 return NotFound();
             return Ok(carts);
         }
-        [HttpPost("AddToCart")]
+        [HttpPost]
         [Authorize]
         public async Task<ActionResult<ReadCartItemDto>> AddToCart(AddCartItemDto addCartItemDto)
         {
@@ -43,7 +43,7 @@ namespace API_Project.Controllers
             return Ok(result);
 
         }
-        [HttpDelete("RemoveFromCart/{productId}")]
+        [HttpDelete("{productId}")]
         [Authorize]
         public async Task<IActionResult> RemoveFromCart(int productId) {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
@@ -55,7 +55,7 @@ namespace API_Project.Controllers
             return Ok();
 
         }
-        [HttpPut("EditItemQuantity")]
+        [HttpPut]
         [Authorize]
         public async Task<IActionResult> EditItemQuantity(EditCartItemDto editCartItemDto)
         {

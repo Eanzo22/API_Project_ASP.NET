@@ -29,7 +29,7 @@ namespace API_Project.Controllers
                 return BadRequest();
             return Ok(orders);
         }
-        [HttpPost("PlaceOrder")]
+        [HttpPost]
         [Authorize]
         public async Task<IActionResult> PlaceOrder([FromBody] List<AddOrderItemsDto> orderDtos)
         {
@@ -41,7 +41,7 @@ namespace API_Project.Controllers
             }
             return StatusCode(StatusCodes.Status201Created,result);
         }
-        [HttpGet("ViewOrdersHistory")]
+        [HttpGet("history")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<ReadOrderDto>>> GetOrdersHistory() {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
